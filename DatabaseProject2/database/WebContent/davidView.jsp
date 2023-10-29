@@ -11,26 +11,23 @@
 <body>
 
 <div align = "center">
-	
+	<!-- 
 	<form action = "initialize">
 		<input type = "submit" value = "Initialize the Database"/>
-	</form>
+	</form> -->
 	<a href="login.jsp"target ="_self" > logout</a><br><br> 
 
 <h1>List all incoming requests of quote</h1>
     <div align="center">
         <table border="1" cellpadding="6">
-            <caption><h2>List of Users</h2></caption>
+            <caption><h2>Jobs</h2></caption>
             <tr>
                 <th>Quote</th>
-                <th>Response</th>
-                <th>Status</th>
+                <th>Requests</th>
                 <th>Orders of Work</th>
-                <th>content</th>
-                <th>Status of Work</th>
-                <th>Revenue</th>
+                <th>Bills</th>
                 <!-- <th>PPS_bal</th> -->
-            </tr>
+            </tr><%-- 
             <c:forEach var="users" items="${listUser}">
                 <tr style="text-align:center">
                     <td><c:out value="${users.email}" /></td>
@@ -41,9 +38,12 @@
                     <td><c:out value="${users.birthday}" /></td>
                     <td><c:out value="${users.cash_bal}"/></td>
                     <td><c:out value="${users.PPS_bal}" /></td>
-            </c:forEach>
+            </c:forEach> --%>
         </table>
 	</div>
+	 <form action = "initialize">
+		<input type = "submit" value = "Generate Revenue"/>
+	</form>
 	</div>
 
 </body>
