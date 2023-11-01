@@ -269,6 +269,31 @@ public class userDAO
     	connect_func();
         statement =  (Statement) connect.createStatement();
         
+        String[] INITIALClient = {
+        		("CREATE TABLE client( " + 
+        		"firstName VARCHAR(9000), " + 
+        		"lastName VARCHAR(9000), " + 
+        		"Phone INTEGER, " + 
+        		"Address VARCHAR(90000000), " + 
+        		"CreditCard INTEGER, " + 
+        		"Email VARCHAR(9000000000), " + 
+        		"PRIMARY KEY(ClientID)")
+        };
+        
+        String[] INITIALTree = {
+        		( "Height INTERGER , " + 
+        		"Size INTEGER, " + 
+        		"DistanceToHouse INTEGER, " + 
+        		"Location VARCHAR(9000000000)") 		
+        };
+        
+        String[] INITLALQuote = { 
+        		("Price DOUBLE, " + 
+        		"Note VARCHAR(90000000)") 
+
+        }; 
+        
+       
         String[] INITIAL = {"drop database if exists testdb; ",
 					        "create database testdb; ",
 					        "use testdb; ",

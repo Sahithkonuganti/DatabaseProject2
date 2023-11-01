@@ -23,10 +23,8 @@
             <caption><h2>Jobs</h2></caption>
             <tr>
                 <th>Quote</th>
-                <th>Requests</th>
                 <th>Orders</th>
                 <th>Bills</th>
-                <!-- <th>PPS_bal</th> -->
             </tr><%-- 
             <c:forEach var="users" items="${listUser}">
                 <tr style="text-align:center">
@@ -40,6 +38,14 @@
                     <td><c:out value="${users.PPS_bal}" /></td>
             </c:forEach> --%>
         </table>
+       <!--  button links to InitialRequest.jsp file -->
+       <a href= "InitialRequest.jsp" target="_blank">
+       <button>Send initial request</button>
+       </a>
+       
+       <!-- <a href= "InitialRequest.jsp" target="_blank">
+       <button>Respond to initial request</button>
+       </a> -->
 	</div>
 	</body>
 </html>
