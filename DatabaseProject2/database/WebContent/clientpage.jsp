@@ -40,7 +40,7 @@
         </table>
        <!--  button links to InitialRequest.jsp file -->
        <a href= "InitialRequest.jsp" target="_blank">
-       <button>Send initial request</button>
+       <button>New Request</button>
        </a>
        
        <!-- <a href= "InitialRequest.jsp" target="_blank">
