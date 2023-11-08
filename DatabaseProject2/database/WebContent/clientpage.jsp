@@ -25,7 +25,7 @@
                 <th>Quote</th>
                 <th>Orders</th>
                 <th>Bills</th>
-            </tr><%-- 
+            </tr>
             <c:forEach var="users" items="${listUser}">
                 <tr style="text-align:center">
                     <td><c:out value="${users.email}" /></td>
@@ -36,7 +36,7 @@
                     <td><c:out value="${users.birthday}" /></td>
                     <td><c:out value="${users.cash_bal}"/></td>
                     <td><c:out value="${users.PPS_bal}" /></td>
-            </c:forEach> --%>
+            </c:forEach>
         </table>
        <!--  button links to InitialRequest.jsp file -->
        <a href= "InitialRequest.jsp" target="_blank">
