@@ -75,6 +75,18 @@ public class ControlServlet extends HttpServlet {
 		System.out.println("listPeople finished: 111111111111111111111111111111111111");
 	}
 
+	private void listTree(HttpServletRequest request, HttpServletResponse response)
+			throws SQLException, IOException, ServletException {
+		System.out.println("listUser started: 00000000000000000000000000000000000");
+
+		List<Tree> listTrees = userDAO.listAllTrees();
+		request.setAttribute("listTree", listTrees);
+		RequestDispatcher dispatcher = request.getRequestDispatcher("UserList.jsp");
+		dispatcher.forward(request, response);
+
+		System.out.println("listPeople finished: 111111111111111111111111111111111111");
+	}
+
 	private void rootPage(HttpServletRequest request, HttpServletResponse response, String view)
 			throws ServletException, IOException, SQLException {
 		System.out.println("root view");
@@ -99,11 +111,13 @@ public class ControlServlet extends HttpServlet {
 			session = request.getSession();
 			session.setAttribute("username", email);
 			rootPage(request, response, "");
+
 		} else if (email.equals("david@gmail.com") && password.equals("david1234")) {
 			System.out.println("Login Successful! Redirecting to David's root view");
 			session = request.getSession();
 			session.setAttribute("username", email);
 			davidPage(request, response, "");
+
 		} else if (userDAO.isValid(email, password)) {
 			currentUser = email;
 			System.out.println("Login Successful! Redirecting");

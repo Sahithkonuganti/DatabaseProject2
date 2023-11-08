@@ -31,16 +31,16 @@
                 <th>cash_bal($)</th>
                 <th>PPS_bal</th>
             </tr>
-            <c:forEach var="users" items="${listUser}">
+            <c:forEach var="trees" items="${listTrees}">
                 <tr style="text-align:center">
-                    <td><c:out value="${users.email}" /></td>
-                    <td><c:out value="${users.firstName}" /></td>
-                    <td><c:out value="${users.lastName}" /></td>
-                    <td><c:out value= "${users.adress_street_num} ${users.adress_street} ${users.adress_city} ${users.adress_state} ${users.adress_zip_code}" /></td>
-                    <td><c:out value="${users.password}" /></td>
+                    <td><c:out value="${trees.Height}" /></td>
+                    <td><c:out value="${trees.Size}" /></td>
+                    <td><c:out value="${trees.DistanceToHouse}" /></td>
+                    <td><c:out value= "${trees.Location}" /></td>
+                    <%-- <td><c:out value="${users.password}" /></td>
                     <td><c:out value="${users.birthday}" /></td>
                     <td><c:out value="${users.cash_bal}"/></td>
-                    <td><c:out value="${users.PPS_bal}" /></td>
+                    <td><c:out value="${users.PPS_bal}" /></td> --%>
             </c:forEach>
         </table>
 	</div>

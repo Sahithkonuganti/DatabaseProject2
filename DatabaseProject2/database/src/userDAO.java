@@ -107,18 +107,18 @@ public class userDAO {
 
 	public List<Tree> listAllTrees() throws SQLException {
 		List<Tree> listTrees = new ArrayList<Tree>();
-		String treesql = "SELECT * FROM tree";
+		String sql = "SELECT * FROM tree";
 		connect_func();
 		statement = (Statement) connect.createStatement();
-		ResultSet resultSet = statement.executeQuery(treesql);
+		ResultSet resultSet = statement.executeQuery(sql);
 
 		while (resultSet.next()) {
-			int height = resultSet.getInt("Height");
-			int size = resultSet.getInt("Size");
-			int distanceToHouse = resultSet.getInt("DistanceToHouse");
-			String location = resultSet.getString("Location");
+			int Height = resultSet.getInt("Height");
+			int Size = resultSet.getInt("Size");
+			int DistanceToHouse = resultSet.getInt("DistanceToHouse");
+			String Location = resultSet.getString("Location");
 
-			Tree trees = new Tree(height, size, distanceToHouse, location);
+			Tree trees = new Tree(Height, Size, DistanceToHouse, Location);
 			listTrees.add(trees);
 		}
 		resultSet.close();
@@ -154,8 +154,9 @@ public class userDAO {
 	}
 
 	public void insertTree(Tree trees) throws SQLException {
-		connect_func("david@gmail.com", "david1234");
-		String sql = "INSERT INTO tree(Height, Size, DistanceToHouse, Location) values (? ? ? ?)";
+		connect_func("root", "pass1234");
+		String sql = "insert into tree(Height, Size, DistanceToHouse, Location) values (? ? ? ?)";
+
 		preparedStatement = (PreparedStatement) connect.prepareStatement(sql);
 		preparedStatement.setInt(1, trees.getHeight());
 		preparedStatement.setInt(2, trees.getSize());
@@ -203,7 +204,7 @@ public class userDAO {
 	}
 
 	public boolean update1(Tree trees) throws SQLException {
-		String sql = "update tree set Height=?, Size=?, DistanceToHousee=?, Location=?";
+		String sql = "update tree set Height=?, Size=?, DistanceToHouse=?, Location=?";
 		connect_func();
 
 		preparedStatement = (PreparedStatement) connect.prepareStatement(sql);
@@ -331,6 +332,7 @@ public class userDAO {
 						+ "adress_city VARCHAR(20)," + "adress_state VARCHAR(2)," + "adress_zip_code VARCHAR(5),"
 						+ "cash_bal DECIMAL(13,2) DEFAULT 1000," + "PPS_bal DECIMAL(13,2) DEFAULT 0,"
 						+ "PRIMARY KEY (email) " + "); ") };
+
 		String[] TUPLES = {
 				("insert into User(email, firstName, lastName, password, birthday, adress_street_num, adress_street, adress_city, adress_state, adress_zip_code, cash_bal, PPS_bal)"
 						+ "values ('susie@gmail.com', 'Susie ', 'Guzman', 'susie1234', '2000-06-27', '1234', 'whatever street', 'detroit', 'MI', '48202','1000', '0'),"
@@ -351,16 +353,11 @@ public class userDAO {
 //		};
 
 		String[] TREETUPLE = { ("INSERT INTO tree(Height, Size, DistanceToHouse, Location)"
-				+ "values(2,4,6, '1111 valky road, washington'), " 
-				+ "(8,10,12,  '1222 Leaf drive, california'), "
-				+ "(14,16,18, '2325 wayne drive, michigan'), " 
-				+ "(20,22,24, '1627 Leslie street, San Fransisco'), "
-				+ "(26,28,30, '2525 Casio road, Texas'), " 
-				+ "(32,34,36, '1425 Citizen street, Japan'), "
-				+ "(38,40,42, '1010 Hasan street, Ohio'), " 
-				+ "(44,46,48, 'Nadeshot street, Detroit'), "
-				+ "(50,52,54, '1500 ludwig road, Tokyo'), " 
-				+ "(56,58,60, '4292 Mercedes street, Germany')") };
+				+ "values(2,4,6, '1111 valky road, washington'), " + "(8,10,12,  '1222 Leaf drive, california'), "
+				+ "(14,16,18, '2325 wayne drive, michigan'), " + "(20,22,24, '1627 Leslie street, San Fransisco'), "
+				+ "(26,28,30, '2525 Casio road, Texas'), " + "(32,34,36, '1425 Citizen street, Japan'), "
+				+ "(38,40,42, '1010 Hasan street, Ohio'), " + "(44,46,48, 'Nadeshot street, Detroit'), "
+				+ "(50,52,54, '1500 ludwig road, Tokyo'), " + "(56,58,60, '4292 Mercedes street, Germany')") };
 
 		// for loop to put these in database
 		for (int i = 0; i < INITIAL.length; i++)
