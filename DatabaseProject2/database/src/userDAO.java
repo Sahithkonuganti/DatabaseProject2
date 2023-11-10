@@ -51,7 +51,7 @@ public class userDAO {
 			connect_func("root", "pass1234");
 			String sql = "select * from user where email = ?";
 			preparedStatement = connect.prepareStatement(sql);
-			preparedStatement.setString(1, email);
+			preparedStatement.setString(5, email);
 			ResultSet rs = preparedStatement.executeQuery();
 			return rs.next();
 		} catch (SQLException e) {
@@ -83,21 +83,14 @@ public class userDAO {
 		ResultSet resultSet = statement.executeQuery(sql);
 
 		while (resultSet.next()) {
-			String email = resultSet.getString("email");
+			int id = resultSet.getInt("id");
 			String firstName = resultSet.getString("firstName");
 			String lastName = resultSet.getString("lastName");
+			String creditCard = resultSet.getString("creditCard");
+			String email = resultSet.getString("email");
 			String password = resultSet.getString("password");
-			String birthday = resultSet.getString("birthday");
-			String adress_street_num = resultSet.getString("adress_street_num");
-			String adress_street = resultSet.getString("adress_street");
-			String adress_city = resultSet.getString("adress_city");
-			String adress_state = resultSet.getString("adress_state");
-			String adress_zip_code = resultSet.getString("adress_zip_code");
-			int cash_bal = resultSet.getInt("cash_bal");
-			int PPS_bal = resultSet.getInt("PPS_bal");
 
-			user users = new user(email, firstName, lastName, password, birthday, adress_street_num, adress_street,
-					adress_city, adress_state, adress_zip_code, cash_bal, PPS_bal);
+			user users = new user(id, firstName, lastName, creditCard, email, password);
 			listUser.add(users);
 		}
 		resultSet.close();
@@ -105,26 +98,26 @@ public class userDAO {
 		return listUser;
 	}
 
-	public List<Tree> listAllTrees() throws SQLException {
-		List<Tree> listTrees = new ArrayList<Tree>();
-		String sql = "SELECT * FROM tree";
-		connect_func();
-		statement = (Statement) connect.createStatement();
-		ResultSet resultSet = statement.executeQuery(sql);
-
-		while (resultSet.next()) {
-			int Height = resultSet.getInt("Height");
-			int Size = resultSet.getInt("Size");
-			int DistanceToHouse = resultSet.getInt("DistanceToHouse");
-			String Location = resultSet.getString("Location");
-
-			Tree trees = new Tree(Height, Size, DistanceToHouse, Location);
-			listTrees.add(trees);
-		}
-		resultSet.close();
-		disconnect();
-		return listTrees;
-	}
+//	public List<Tree> listAllTrees() throws SQLException {
+//		List<Tree> listTrees = new ArrayList<Tree>();
+//		String sql = "SELECT * FROM tree";
+//		connect_func();
+//		statement = (Statement) connect.createStatement();
+//		ResultSet resultSet = statement.executeQuery(sql);
+//
+//		while (resultSet.next()) {
+//			int Height = resultSet.getInt("Height");
+//			int Size = resultSet.getInt("Size");
+//			int DistanceToHouse = resultSet.getInt("DistanceToHouse");
+//			String Location = resultSet.getString("Location");
+//
+//			Tree trees = new Tree(Height, Size, DistanceToHouse, Location);
+//			listTrees.add(trees);
+//		}
+//		resultSet.close();
+//		disconnect();
+//		return listTrees;
+//	}
 
 	protected void disconnect() throws SQLException {
 		if (connect != null && !connect.isClosed()) {
@@ -134,20 +127,14 @@ public class userDAO {
 
 	public void insert(user users) throws SQLException {
 		connect_func("root", "pass1234");
-		String sql = "insert into User(email, firstName, lastName, password, birthday,adress_street_num, adress_street,adress_city,adress_state,adress_zip_code,cash_bal,PPS_bal) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ? ,? ,?)";
+		String sql = "insert into User(id, firstName, lastName, creditCard, email, password) values (?, ?, ?, ?, ?, ?)";
 		preparedStatement = (PreparedStatement) connect.prepareStatement(sql);
-		preparedStatement.setString(1, users.getEmail());
+		preparedStatement.setInt(1, users.getId());
 		preparedStatement.setString(2, users.getFirstName());
 		preparedStatement.setString(3, users.getLastName());
-		preparedStatement.setString(4, users.getPassword());
-		preparedStatement.setString(5, users.getBirthday());
-		preparedStatement.setString(6, users.getAdress_street_num());
-		preparedStatement.setString(7, users.getAdress_street());
-		preparedStatement.setString(8, users.getAdress_city());
-		preparedStatement.setString(9, users.getAdress_state());
-		preparedStatement.setString(10, users.getAdress_zip_code());
-		preparedStatement.setInt(11, users.getCash_bal());
-		preparedStatement.setInt(12, users.getPPS_bal());
+		preparedStatement.setString(4, String.valueOf(users.getCreditCard()));
+		preparedStatement.setString(5, users.getEmail());
+		preparedStatement.setString(6, users.getPassword());
 
 		preparedStatement.executeUpdate();
 		preparedStatement.close();
@@ -181,43 +168,37 @@ public class userDAO {
 	}
 
 	public boolean update(user users) throws SQLException {
-		String sql = "update User set firstName=?, lastName =?,password = ?,birthday=?,adress_street_num =?, adress_street=?,adress_city=?,adress_state=?,adress_zip_code=?, cash_bal=?, PPS_bal =? where email = ?";
+		String sql = "update User set id=?, firstName=?, lastName =?, creditCard=?, email=?, password=? where email = ?";
 		connect_func();
 
 		preparedStatement = (PreparedStatement) connect.prepareStatement(sql);
-		preparedStatement.setString(1, users.getEmail());
+		preparedStatement.setInt(1, users.getId());
 		preparedStatement.setString(2, users.getFirstName());
 		preparedStatement.setString(3, users.getLastName());
-		preparedStatement.setString(4, users.getPassword());
-		preparedStatement.setString(5, users.getBirthday());
-		preparedStatement.setString(6, users.getAdress_street_num());
-		preparedStatement.setString(7, users.getAdress_street());
-		preparedStatement.setString(8, users.getAdress_city());
-		preparedStatement.setString(9, users.getAdress_state());
-		preparedStatement.setString(10, users.getAdress_zip_code());
-		preparedStatement.setInt(11, users.getCash_bal());
-		preparedStatement.setInt(12, users.getPPS_bal());
+		preparedStatement.setString(4, String.valueOf(users.getCreditCard()));
+		preparedStatement.setString(5, users.getEmail());
+		preparedStatement.setString(6, users.getPassword());
 
 		boolean rowUpdated = preparedStatement.executeUpdate() > 0;
 		preparedStatement.close();
 		return rowUpdated;
 	}
 
-	public boolean update1(Tree trees) throws SQLException {
-		String sql = "update tree set Height=?, Size=?, DistanceToHouse=?, Location=?";
-		connect_func();
-
-		preparedStatement = (PreparedStatement) connect.prepareStatement(sql);
-		preparedStatement.setInt(1, trees.getHeight());
-		preparedStatement.setInt(2, trees.getSize());
-		preparedStatement.setInt(3, trees.getDistanceToHouse());
-		preparedStatement.setString(4, trees.getLocation());
-
-		boolean rowUpdated = preparedStatement.executeUpdate() > 0;
-		preparedStatement.close();
-		return rowUpdated;
-
-	}
+//	public boolean update1(Tree trees) throws SQLException {
+//		String sql = "update tree set Height=?, Size=?, DistanceToHouse=?, Location=?";
+//		connect_func();
+//
+//		preparedStatement = (PreparedStatement) connect.prepareStatement(sql);
+//		preparedStatement.setInt(1, trees.getHeight());
+//		preparedStatement.setInt(2, trees.getSize());
+//		preparedStatement.setInt(3, trees.getDistanceToHouse());
+//		preparedStatement.setString(4, trees.getLocation());
+//
+//		boolean rowUpdated = preparedStatement.executeUpdate() > 0;
+//		preparedStatement.close();
+//		return rowUpdated;
+//
+//	}
 
 	public user getUser(String email) throws SQLException {
 		user user = null;
@@ -231,19 +212,14 @@ public class userDAO {
 		ResultSet resultSet = preparedStatement.executeQuery();
 
 		if (resultSet.next()) {
+			int id = resultSet.getInt("id");
 			String firstName = resultSet.getString("firstName");
 			String lastName = resultSet.getString("lastName");
+			String creditCard = resultSet.getString("creditCard");
+			// email = resultSet.getString("email");
 			String password = resultSet.getString("password");
-			String birthday = resultSet.getString("birthday");
-			String adress_street_num = resultSet.getString("adress_street_num");
-			String adress_street = resultSet.getString("adress_street");
-			String adress_city = resultSet.getString("adress_city");
-			String adress_state = resultSet.getString("adress_state");
-			String adress_zip_code = resultSet.getString("adress_zip_code");
-			int cash_bal = resultSet.getInt("cash_bal");
-			int PPS_bal = resultSet.getInt("PPS_bal");
-			user = new user(email, firstName, lastName, password, birthday, adress_street_num, adress_street,
-					adress_city, adress_state, adress_zip_code, cash_bal, PPS_bal);
+
+			user = new user(id, firstName, lastName, creditCard, email, password);
 		}
 
 		resultSet.close();
@@ -257,7 +233,7 @@ public class userDAO {
 		String sql = "SELECT * FROM User WHERE email = ?";
 		connect_func();
 		preparedStatement = (PreparedStatement) connect.prepareStatement(sql);
-		preparedStatement.setString(1, email);
+		preparedStatement.setString(5, email);
 		ResultSet resultSet = preparedStatement.executeQuery();
 
 		System.out.println(checks);
@@ -275,7 +251,7 @@ public class userDAO {
 		String sql = "SELECT * FROM User WHERE password = ?";
 		connect_func();
 		preparedStatement = (PreparedStatement) connect.prepareStatement(sql);
-		preparedStatement.setString(1, password);
+		preparedStatement.setString(6, password);
 		ResultSet resultSet = preparedStatement.executeQuery();
 
 		System.out.println(checks);
@@ -316,48 +292,35 @@ public class userDAO {
 				+ "Phone VARCHAR(900000), " + "Address VARCHAR(90000000), " + "CreditCard VARCHAR(90000000000000), "
 				+ "Email VARCHAR(9000000000), " + "PRIMARY KEY(ClientID)") };
 
-		String[] INITIALTree = { ("CREATE TABLE  if not exists tree( " + "Height INT, " + "Size INT, "
-				+ "DistanceToHouse INT, " + "Location VARCHAR(100) " + "); ") };
+//		String[] INITIALTree = { ("CREATE TABLE  if not exists tree( " + "Height INT, " + "Size INT, "
+//				+ "DistanceToHouse INT, " + "Location VARCHAR(100) " + "); ") };
 
-		String[] INITLALQuote = { ("Price DOUBLE, " + "Note VARCHAR(90000000)")
-
-		};
+//		String[] INITLALQuote = {
+//				("CREATE TABLE  if not exists Quote( " + "Price DOUBLE, " + "Note VARCHAR(300)" + "); ") };
 
 		String[] INITIAL = { "drop database if exists testdb; ", "create database testdb; ", "use testdb; ",
 				"drop table if exists User; ",
-				("CREATE TABLE if not exists User( " + "email VARCHAR(50) NOT NULL, "
-						+ "firstName VARCHAR(10) NOT NULL, " + "lastName VARCHAR(10) NOT NULL, "
-						+ "password VARCHAR(20) NOT NULL, " + "birthday DATE NOT NULL, "
-						+ "adress_street_num VARCHAR(4) , " + "adress_street VARCHAR(30) , "
-						+ "adress_city VARCHAR(20)," + "adress_state VARCHAR(2)," + "adress_zip_code VARCHAR(5),"
-						+ "cash_bal DECIMAL(13,2) DEFAULT 1000," + "PPS_bal DECIMAL(13,2) DEFAULT 0,"
-						+ "PRIMARY KEY (email) " + "); ") };
+				("CREATE TABLE if not exists User( " + "id INTEGER," + "firstName VARCHAR(50) NOT NULL, "
+						+ "lastName VARCHAR(50) NOT NULL, " + "creditCard CHAR(16), " + "email VARCHAR(50) NOT NULL, "
+						+ "password VARCHAR(20) NOT NULL, " + "PRIMARY KEY(id), " + "UNIQUE(email)" + "); ") };
 
-		String[] TUPLES = {
-				("insert into User(email, firstName, lastName, password, birthday, adress_street_num, adress_street, adress_city, adress_state, adress_zip_code, cash_bal, PPS_bal)"
-						+ "values ('susie@gmail.com', 'Susie ', 'Guzman', 'susie1234', '2000-06-27', '1234', 'whatever street', 'detroit', 'MI', '48202','1000', '0'),"
-						+ "('don@gmail.com', 'Don', 'Cummings','don123', '1969-03-20', '1000', 'hi street', 'mama', 'MO', '12345','1000', '0'),"
-						+ "('margarita@gmail.com', 'Margarita', 'Lawson','margarita1234', '1980-02-02', '1234', 'ivan street', 'tata','CO','12561','1000', '0'),"
-						+ "('jo@gmail.com', 'Jo', 'Brady','jo1234', '2002-02-02', '3214','marko street', 'brat', 'DU', '54321','1000', '0'),"
-						+ "('wallace@gmail.com', 'Wallace', 'Moore','wallace1234', '1971-06-15', '4500', 'frey street', 'sestra', 'MI', '48202','1000', '0'),"
-						+ "('amelia@gmail.com', 'Amelia', 'Phillips','amelia1234', '2000-03-14', '1245', 'm8s street', 'baka', 'IL', '48000','1000', '0'),"
-						+ "('sophie@gmail.com', 'Sophie', 'Pierce','sophie1234', '1999-06-15', '2468', 'yolos street', 'ides', 'CM', '24680','1000', '0'),"
-						+ "('angelo@gmail.com', 'Angelo', 'Francis','angelo1234', '2021-06-14', '4680', 'egypt street', 'lolas', 'DT', '13579','1000', '0'),"
-						+ "('rudy@gmail.com', 'Rudy', 'Smith','rudy1234', '1706-06-05', '1234', 'sign street', 'samo ne tu','MH', '09876','1000', '0'),"
-						+ "('jeannette@gmail.com', 'Jeannette ', 'Stone','jeannette1234', '2001-04-24', '0981', 'snoop street', 'kojik', 'HW', '87654','1000', '0'),"
-						+ "('root', 'default', 'default','pass1234', '2021-03-22', '0000', 'Default', 'Default', '0', '00000','1000','1000000000'),"
-						+ "('david@gmail.com', 'David','Smith','david1234', '2020-02-03', '2323', 'sookie street', 'canton', 'WA', '48189','1000','1000000000')") };
+		String[] TUPLES = { ("insert into User(id, firstName, lastName, creditCard, email, password)"
+				+ "values ('31232', 'Susie ', 'Guzman', '2839349223492349', 'susie@gmail.com', 'susie1234'),"
+				+ "('1', 'default', 'default', '1234567812345678', 'root', 'pass1234'),"
+				+ "('2', 'David', 'Smith', '1234123412341234', 'david@gmail.com', 'david1234')") };
 
-//		String[] ClIENTTUPLES = { ("insert into Client(firstName, lastName, phoneNum, address, credit_card, email, client_id )" 
-//				+ "values (Het, Patel, 734-313-9090, 1111 Polaris Drive, Columbus )")
-//		};
+//		String[] TREETUPLE = { ("INSERT INTO tree(Height, Size, DistanceToHouse, Location)"
+//				+ "values(2,4,6, '1111 valky road, washington'), " + "(8,10,12,  '1222 Leaf drive, california'), "
+//				+ "(14,16,18, '2325 wayne drive, michigan'), " + "(20,22,24, '1627 Leslie street, San Fransisco'), "
+//				+ "(26,28,30, '2525 Casio road, Texas'), " + "(32,34,36, '1425 Citizen street, Japan'), "
+//				+ "(38,40,42, '1010 Hasan street, Ohio'), " + "(44,46,48, 'Nadeshot street, Detroit'), "
+//				+ "(50,52,54, '1500 ludwig road, Tokyo'), " + "(56,58,60, '4292 Mercedes street, Germany')") };
 
-		String[] TREETUPLE = { ("INSERT INTO tree(Height, Size, DistanceToHouse, Location)"
-				+ "values(2,4,6, '1111 valky road, washington'), " + "(8,10,12,  '1222 Leaf drive, california'), "
-				+ "(14,16,18, '2325 wayne drive, michigan'), " + "(20,22,24, '1627 Leslie street, San Fransisco'), "
-				+ "(26,28,30, '2525 Casio road, Texas'), " + "(32,34,36, '1425 Citizen street, Japan'), "
-				+ "(38,40,42, '1010 Hasan street, Ohio'), " + "(44,46,48, 'Nadeshot street, Detroit'), "
-				+ "(50,52,54, '1500 ludwig road, Tokyo'), " + "(56,58,60, '4292 Mercedes street, Germany')") };
+//		String[] QUOTETUPLE = { ("INSERT INTO quote(Price, Note) " + "values(100, 'Why is it priced so high?'),"
+//				+ "(110, 'There seems to have been a mistake')," + "(120, 'I dont want this'),"
+//				+ "(130, 'Can you re-do the math')," + "(140, 'I have to reconsider')," + "(150, 'Will respond asap'),"
+//				+ "(160, 'I found a cheaper quote, backing out')," + "(170, 'Not today'),"
+//				+ "(180, 'Cannot go through')," + "(190, 'Not at all')") };
 
 		// for loop to put these in database
 		for (int i = 0; i < INITIAL.length; i++)
@@ -366,12 +329,18 @@ public class userDAO {
 		for (int i = 0; i < TUPLES.length; i++)
 			statement.execute(TUPLES[i]);
 
-		for (int i = 0; i < INITIALTree.length; i++)
-			statement.execute(INITIALTree[i]);
-
-		for (int i = 0; i < TREETUPLE.length; i++) {
-			statement.execute(TREETUPLE[i]);
-		}
+//		for (int i = 0; i < INITIALTree.length; i++)
+//			statement.execute(INITIALTree[i]);
+//
+//		for (int i = 0; i < TREETUPLE.length; i++) {
+//			statement.execute(TREETUPLE[i]);
+//		}
+//		for (int i = 0; i < INITLALQuote.length; i++) {
+//			statement.execute(INITLALQuote[i]);
+//		}
+//		for (int i = 0; i < QUOTETUPLE.length; i++) {
+//			statement.execute(QUOTETUPLE[i]);
+//		}
 
 //		for (int i = 0; i < INITIALClient.length; i++)
 //			statement.execute(TUPLES[i]);

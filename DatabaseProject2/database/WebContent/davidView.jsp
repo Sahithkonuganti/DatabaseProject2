@@ -28,19 +28,11 @@
                 <th>Bills</th>
                 <!-- <th>PPS_bal</th> -->
             </tr> 
-            <c:forEach var="trees" items="${listTrees}">
-                <tr style="text-align:center">
-                    <td><c:out value="${trees.Height}" /></td>
-                	<td><c:out value="${trees.Size}"/></td>
-                	<td><c:out value="${trees.DistanceToHouse}"/></td>
-                	<td><c:out value="${trees.Location}"/></td>
-            </c:forEach> 
         </table>
 	</div>
 	 <form action = "initialize">
 		<input type = "submit" value = "Generate Revenue"/>
 	</form>
 	</div>
-
 </body>
 </html>

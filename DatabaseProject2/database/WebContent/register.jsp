@@ -10,9 +10,9 @@
 		<form action="register">
 			<table border="1" cellpadding="5">
 				<tr>
-					<th>Username: </th>
+					<th>ID: </th>
 					<td align="center" colspan="3">
-						<input type="text" name="email" size="45"  value="example@gmail.com" onfocus="this.value=''">
+						<input type="number" name="id" size="45" value="id" onfocus="this.value=''">
 					</td>
 				</tr>
 				<tr>
@@ -28,11 +28,16 @@
 					</td>
 				</tr>
 				<tr>
-					<th>Birthday: </th>
+					<th>Credit Card: </th>
 					<td align="center" colspan="3">
-						<input type="text" name="birthday" size="45" value="YYYY-MM-DD" onfocus="this.value=''">
+						<input type="text" name="creditCard" size="45" value="1111222233334444" onfocus="this.value=''">
 					</td>
-	
+				</tr>
+				<tr>
+					<th>Email: </th>
+					<td align="center" colspan="3">
+						<input type="text" name="email" size="45"  value="example@gmail.com" onfocus="this.value=''">
+					</td>
 				</tr>
 				<tr>
 					<th>Password: </th>
@@ -45,7 +50,6 @@
 					<td align="center" colspan="3">
 						<input type="password" name="confirmation" size="45" value="password" onfocus="this.value=''">
 					</td>
-				
 				</tr>
 				<tr>
 					<td align="center" colspan="5">

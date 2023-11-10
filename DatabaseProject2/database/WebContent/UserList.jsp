@@ -12,26 +12,21 @@
         <table border="1" cellpadding="5">
             <caption><h2>List of People</h2></caption>
             <tr>
-				<th>Email</th>
+				<th>ID</th>
                 <th>First name</th>
                 <th>Last name</th>
-                <th>Adress</th>
+                <th>Credit Card</th>
+                <th>Email</th>
                 <th>Password</th>
-                <th>Birthday</th>
-                <th>cash_bal($)</th>
-                <th>PPS_bal</th>
-
             </tr>
-            <c:forEach var="trees" items="${listTrees}">
+            <c:forEach var="users" items="${listUsers}">
                 <tr style="text-align:center">
-                    <td><c:out value="${trees.Height}" /></td>
-                    <td><c:out value="${trees.Size}" /></td>
-                    <td><c:out value="${trees.DistanceToHouse}" /></td>
-                    <td><c:out value= "${trees.Location}" /></td>
-                    <%-- <td><c:out value="${users.password}" /></td>
-                    <td><c:out value="${users.birthday}" /></td>
-                    <td><c:out value="${users.cash_bal}"/></td>
-                    <td><c:out value="${users.PPS_bal}" /></td> --%>
+                    <td><c:out value="${users.id}" /></td>
+                    <td><c:out value="${users.firstName}" /></td>
+                    <td><c:out value="${users.lastName}" /></td>
+                    <td><c:out value="${users.creditCard}" /></td>
+                    <td><c:out value="${users.email}" /></td>
+                    <td><c:out value="${users.password}" /></td>
                 </tr>
             </c:forEach>
         </table>

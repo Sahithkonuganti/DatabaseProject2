@@ -16,25 +16,21 @@
         <table border="1" cellpadding="6">
             <caption><h2>List of Users</h2></caption>
             <tr>
-                <th>Email</th>
+                <th>ID</th>
                 <th>First name</th>
                 <th>Last name</th>
-                <th>Adress</th>
+                <th>Credit Card</th>
+                <th>Email</th>
                 <th>Password</th>
-                <th>Birthday</th>
-                <th>cash_bal($)</th>
-                <th>PPS_bal</th>
             </tr>
-            <c:forEach var="Tree" items="${get_Tree}">
+            <c:forEach var="user" items="${get_User}">
                 <tr style="text-align:center">
-                    <td>"${tree.Height}" </td>
-                    <td>"${tree.Size}"</td>
-                    <td>"${tree.DistanceToHouse}"</td>
-                    <td>"${tree.Location}"</td>
-                    <%-- <td>"${user.password}"</td>
-                    <td>"${user.birthday}"</td>
-                    <td>"${user.cash_bal}"</td>
-                    <td>"${user.PPS_bal}"</td> --%>
+                    <td><c:out value="${users.id}" /></td>
+                    <td><c:out value="${users.firstName}" /></td>
+                    <td><c:out value="${users.lastName}" /></td>
+                    <td><c:out value="${users.creditCard}" /></td>
+                    <td><c:out value="${users.email}" /></td>
+                    <td><c:out value="${users.password}" /></td>
                  </tr>
             </c:forEach>
           </table>
