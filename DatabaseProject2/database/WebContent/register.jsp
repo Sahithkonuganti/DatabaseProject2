@@ -10,12 +10,6 @@
 		<form action="register">
 			<table border="1" cellpadding="5">
 				<tr>
-					<th>ID: </th>
-					<td align="center" colspan="3">
-						<input type="number" name="id" size="45" value="id" onfocus="this.value=''">
-					</td>
-				</tr>
-				<tr>
 					<th>First Name: </th>
 					<td align="center" colspan="3">
 						<input type="text" name="firstName" size="45" value="FirstName" onfocus="this.value=''">

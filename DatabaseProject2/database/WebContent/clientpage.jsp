@@ -28,12 +28,13 @@
             </tr>
             <c:forEach var="users" items="${listUser}">
                 <tr style="text-align:center">
-                    <td><c:out value="${users.id}" /></td>
-                    <td><c:out value="${users.firstName}" /></td>
-                    <td><c:out value="${users.lastName}" /></td>
-                    <td><c:out value= "${users.creditCard}" /></td>
-                    <td><c:out value="${users.email}" /></td>
-                    <td><c:out value="${users.password}" /></td>
+                    <td>${users.id}</td>
+                    <td>${users.firstName}</td>
+                    <td>${users.lastName}</td>
+                    <td>${users.creditCard}</td>
+                    <td>${users.email}</td>
+                    <td>${users.password}</td>
+                    </tr>
             </c:forEach>
         </table>
        <!--  button links to InitialRequest.jsp file -->

@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>David page</title>
+<title>David's page</title>
 </head>
 <body>
 
@@ -26,13 +26,13 @@
                 <th>Requests</th>
                 <th>Orders of Work</th>
                 <th>Bills</th>
-                <!-- <th>PPS_bal</th> -->
             </tr> 
         </table>
 	</div>
 	 <form action = "initialize">
 		<input type = "submit" value = "Generate Revenue"/>
 	</form>
+	
 	</div>
 </body>
 </html>

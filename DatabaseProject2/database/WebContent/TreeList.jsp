@@ -12,23 +12,19 @@
         <table border="1" cellpadding="5">
             <caption><h2>List of People</h2></caption>
             <tr>
-				<th>ID</th>
-                <th>First name</th>
-                <th>Last name</th>
-                <th>Credit Card</th>
-                <th>Email</th>
-                <th>Password</th>
+            <!-- need to update / change -->
+				<th>Tree Height</th>
+                <th>Tree Size</th>
+                <th>Distance To House</th>
+                <th>Location</th>
 
             </tr>
-            <c:forEach var="users" items="${listUser}">
+            <c:forEach var="Tree" items="${listTrees}">
                 <tr style="text-align:center">
-                    <td><c:out value="${users.id}" /></td>
-                    <td><c:out value="${users.firstName}" /></td>
-                    <td><c:out value="${users.lastName}" /></td>
-                    <td><c:out value="${users.creditCard}" /></td>
-                    <td><c:out value="${users.email}" /></td>
-                    <td><c:out value="${users.password}" /></td>
-                    
+                    <td><c:out value="${Tree.Height}" /></td>
+                    <td><c:out value="${Tree.Size}" /></td>
+                    <td><c:out value="${Tree.DistanceToHouse}" /></td>
+                    <td><c:out value="${Tree.Location}" /></td>
                 </tr>
             </c:forEach>
         </table>

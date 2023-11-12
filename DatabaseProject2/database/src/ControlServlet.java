@@ -1,6 +1,7 @@
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Random;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -14,6 +15,9 @@ public class ControlServlet extends HttpServlet {
 	private userDAO userDAO = new userDAO();
 	private String currentUser;
 	private HttpSession session = null;
+
+	// Create instance of Random class
+	Random rand = new Random();
 
 	public ControlServlet() {
 
@@ -41,6 +45,9 @@ public class ControlServlet extends HttpServlet {
 				break;
 			case "/register":
 				register(request, response);
+				break;
+			case "/addTree":
+				addTree(request, response);
 				break;
 			case "/initialize":
 				userDAO.init();
@@ -75,17 +82,17 @@ public class ControlServlet extends HttpServlet {
 		System.out.println("listPeople finished: 111111111111111111111111111111111111");
 	}
 
-//	private void listTree(HttpServletRequest request, HttpServletResponse response)
-//			throws SQLException, IOException, ServletException {
-//		System.out.println("listUser started: 00000000000000000000000000000000000");
-//
-//		List<Tree> listTrees = userDAO.listAllTrees();
-//		request.setAttribute("listTree", listTrees);
-//		RequestDispatcher dispatcher = request.getRequestDispatcher("UserList.jsp");
-//		dispatcher.forward(request, response);
-//
-//		System.out.println("listPeople finished: 111111111111111111111111111111111111");
-//	}
+	private void listTree(HttpServletRequest request, HttpServletResponse response)
+			throws SQLException, IOException, ServletException {
+		System.out.println("listUser started: 00000000000000000000000000000000000");
+
+		List<Tree> listTrees = userDAO.listAllTrees();
+		request.setAttribute("listTree", listTrees);
+		RequestDispatcher dispatcher = request.getRequestDispatcher("UserList.jsp");
+		dispatcher.forward(request, response);
+
+		System.out.println("listPeople finished: 111111111111111111111111111111111111");
+	}
 
 	private void rootPage(HttpServletRequest request, HttpServletResponse response, String view)
 			throws ServletException, IOException, SQLException {
@@ -112,7 +119,7 @@ public class ControlServlet extends HttpServlet {
 			session.setAttribute("email", email);
 			rootPage(request, response, "");
 
-		} else if (email.equals("david@gmail.com") && password.equals("david1234")) {
+		} else if (email.equals("david@mail.com") && password.equals("david1234")) {
 			System.out.println("Login Successful! Redirecting to David's root view");
 			session = request.getSession();
 			session.setAttribute("email", email);
@@ -131,7 +138,7 @@ public class ControlServlet extends HttpServlet {
 
 	private void register(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException, SQLException {
-		int id = Integer.parseInt(request.getParameter("StudentId"));
+		int id = rand.nextInt(1000);
 		String firstName = request.getParameter("firstName");
 		String lastName = request.getParameter("lastName");
 		String creditCard = request.getParameter("creditCard");
@@ -159,6 +166,20 @@ public class ControlServlet extends HttpServlet {
 
 	private void logout(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		currentUser = "";
+		response.sendRedirect("login.jsp");
+	}
+
+	private void addTree(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException, SQLException {
+		int id = rand.nextInt(1000);
+		double size = Double.valueOf(request.getParameter("tSize"));
+		double height = Double.valueOf(request.getParameter("tHeight"));
+		String location = request.getParameter("tLocation");
+		// double distance = request.getParameter("tDistanceFromHouse");
+
+		System.out.println("Registration Successful! Added to database");
+		// Tree trees = new Tree(id, size, height, location, distance);
+		// userDAO.insert(users);
 		response.sendRedirect("login.jsp");
 	}
 
