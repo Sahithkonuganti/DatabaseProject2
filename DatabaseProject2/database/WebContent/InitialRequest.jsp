@@ -5,6 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Request</title>
+<a href="clientpage.jsp"target ="_self" > Return to Client View</a><br><br> 
 <center><h1>Here you can submit for an initial request</h1></center>
 <center><h3>Quote: </h3></center>
 <!-- request needs:  
@@ -16,29 +17,32 @@
 -->
 </head>
 <div align="center">
-<form action="addTree">
-	<label for="tSize">Tree size: </label><br>
-	<input type="text" id="tSize" name="tSize"><br>
+<form action="addTree" method="post">
+
+	<label for="size">Tree size: </label><br>
+	<input type="text" id="size" name="size" placeholder="5.0" onfocus="this.value=''"><br>
 	
-	<label for="tHeight">Tree height: </label><br>
-	<input type="text" id="tHeight" name="tHeight"><br>
+	<label for="height">Tree height: </label><br>
+	<input type="text" id="height" name="height" placeholder="7.0" onfocus="this.value=''"><br>
 	
-	<label for="tLocation">Tree location: </label><br>
-	<input type="text" id="tLocation" name="tLocation"><br>
+	<label for="location">Tree location: </label><br>
+	<input type="text" id="location" name="location" placeholder="Backyard" onfocus="this.value=''"><br>
 	
-	<label for="tDistanceToHouse">What is the distance to the house? </label><br>
-	<input type="text" id="tDistanceToHouse" name="tDistanceToHouse"><br><br>
+	<label for="distanceFromHouse">What is the distance to the house? </label><br>
+	<input type="text" id="distanceFromHouse" name="distanceFromHouse" placeholder="10.52" onfocus="this.value=''"><br><br>
 	
-	<input type="file" name="image1" accept="image/*"><br>
-	<input type="file" name="image2" accept="image/*"><br>
-	<input type="file" name="image3" accept="image/*"><br><br>
+	<input type="file" name="image1" accept="image/*" onfocus="this.value=''"><br>
+	
+	<input type="file" name="image2" accept="image/*" onfocus="this.value=''"><br>
+	
+	<input type="file" name="image3" accept="image/*" onfocus="this.value=''"><br><br>
 	
 	<input type="submit" value="Add Tree"><br><br><br>
 </form>
 
-<form action="submitRequest">
+<form action="submitRequest" method="post">
 	<label for="note">Note: </label><br>
-	<textarea id="note" name="note" rows="5" cols="30"></textarea><br>
+	<textarea id="note" name="note" rows="5" cols="30" onfocus="this.value=''"></textarea><br>
 	
 	<input type="submit" value="Submit">
 </form>

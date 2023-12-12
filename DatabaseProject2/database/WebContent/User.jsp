@@ -22,6 +22,7 @@
                 <th>Credit Card</th>
                 <th>Email</th>
                 <th>Password</th>
+                <th>Client Id</th>
             </tr>
             <c:forEach var="user" items="${get_user}">
                 <tr style="text-align:center">
@@ -31,6 +32,7 @@
                     <td><c:out value="${user.creditCard}" /></td>
                     <td><c:out value="${user.email}" /></td>
                     <td><c:out value="${user.password}" /></td>
+                    <td><c:out value="${user.clientId}" /></td>
                  </tr>
             </c:forEach>
           </table>

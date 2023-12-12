@@ -28,6 +28,7 @@
                     <td><c:out value="${users.creditCard}" /></td>
                     <td><c:out value="${users.email}" /></td>
                     <td><c:out value="${users.password}" /></td>
+                    <td><c:out value="${users.clientId}" /></td>
                     
                 </tr>
             </c:forEach>

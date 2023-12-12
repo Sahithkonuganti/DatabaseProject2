@@ -6,18 +6,21 @@ public class Tree {
 	protected double height;
 	protected String location;
 	protected double distanceFromHouse;
+	protected String email;
 
 	public Tree() {
 
 	}
 
-	public Tree(int id, int quoteId, double size, double height, String location, double distanceFromHouse) {
+	public Tree(int id, int quoteId, double size, double height, String location, double distanceFromHouse,
+			String email) {
 		this.id = id;
 		this.quoteId = quoteId;
 		this.size = size;
 		this.height = height;
 		this.distanceFromHouse = distanceFromHouse;
 		this.location = location;
+		this.email = email;
 	}
 
 	// getters and setters
@@ -67,6 +70,14 @@ public class Tree {
 
 	public void setLocation(String location) {
 		this.location = location;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public String getEmail() {
+		return email;
 	}
 
 }

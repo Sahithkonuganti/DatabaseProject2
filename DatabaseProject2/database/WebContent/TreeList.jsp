@@ -12,21 +12,21 @@
         <table border="1" cellpadding="5">
             <caption><h2>List of People</h2></caption>
             <tr>
-            <!-- need to update / change -->
+           
 				<th>Tree Height</th>
                 <th>Tree Size</th>
                 <th>Distance To House</th>
                 <th>Location</th>
 
             </tr>
-            <c:forEach var="Tree" items="${listTrees}">
+               <c:forEach var="Tree" items="${listTrees}">
                 <tr style="text-align:center">
                     <td><c:out value="${Tree.Height}" /></td>
                     <td><c:out value="${Tree.Size}" /></td>
                     <td><c:out value="${Tree.DistanceToHouse}" /></td>
                     <td><c:out value="${Tree.Location}" /></td>
                 </tr>
-            </c:forEach>
+            </c:forEach>  
         </table>
     </div>   
 </body>
